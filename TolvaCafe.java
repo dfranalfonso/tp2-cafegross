@@ -6,14 +6,14 @@ package com.cafegross;
 public abstract class TolvaCafe {
     protected int numeroTolva;
     protected String origen;
-    protected double pesoMaximo;
+    protected double pesomax;
     protected double kilosActuales;
     protected boolean estadoOperativo;
 
-    public TolvaCafe(int numeroTolva, String origen, double pesoMaximo) {
+    public TolvaCafe(int numeroTolva, String origen, double pesomax) {
         this.numeroTolva = numeroTolva;
         this.origen = origen;
-        this.pesoMaximo = pesoMaximo;
+        this.pesomax = pesomax;
         this.kilosActuales = 0.0;
         this.estadoOperativo = true;
     }
@@ -27,15 +27,15 @@ public abstract class TolvaCafe {
             return false;
         }
 
-        // Validación de rango por saco entre 10 kg a 70 kg
+        // Validación de rango por saco entre 10 kg y 70 kg
         if (kilos < 10.0 || kilos > 70.0) {
             System.out.println("Rechazo de pesaje: Saco fuera del rango admisible (10 kg - 70 kg). Ingresado: " + kilos + " kg.");
             return false;
         }
 
         // Validación de sobrecarga estructural de la tolva
-        if (this.kilosActuales + kilos > this.pesoMaximo) {
-            System.out.println("Alerta de sobrecapacidad: Se supera el peso máximo de " + pesoMaximo + " kg.");
+        if (this.kilosActuales + kilos > this.pesomax) {
+            System.out.println("Alerta de sobrecapacidad: Se supera el peso máximo de " + pesomax + " kg.");
             return false;
         }
 
@@ -54,7 +54,7 @@ public abstract class TolvaCafe {
     }
 
     public boolean verificarCapacidadDisponible(double kilos) {
-        return (this.kilosActuales + kilos) <= this.pesoMaximo;
+        return (this.kilosActuales + kilos) <= this.pesomax;
     }
 
     public double getKilosActuales() {
@@ -69,12 +69,12 @@ public abstract class TolvaCafe {
         return origen;
     }
 
-    public double getPesoMaximo() {
-        return pesoMaximo;
+    public double getPesomax() {
+        return pesomax;
     }
 
     public boolean estaDisponible() {
-        return estadoOperativo && (kilosActuales < pesoMaximo);
+        return estadoOperativo && (kilosActuales < pesomax);
     }
 
     public abstract String getEstado();
